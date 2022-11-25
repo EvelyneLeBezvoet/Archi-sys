@@ -1,0 +1,24 @@
+/**
+ * Carry lookahead method first step:
+ * A_i,B_i,C_i -> S_i, C_(i+1)
+ */
+
+CHIP Carry {
+    IN  
+        ai,          
+        bi, 
+        ci; 
+
+    OUT 
+        si,
+        ci1;
+    
+
+    PARTS:
+    //Your code here
+    Xor(a=ai,b=bi,out=pi);
+    And(a=ai,b=bi,out=gi);
+    Xor(a=pi,b=ci,out=si);
+    And(a=pi,b=ci,out=out1);
+    Or(a=out1,b=gi,out=ci1);
+}

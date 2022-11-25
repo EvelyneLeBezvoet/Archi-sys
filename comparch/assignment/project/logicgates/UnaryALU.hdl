@@ -1,0 +1,27 @@
+
+/**
+ * The UnaryALU (Unary Arithmetic Logic Unit) modifies a single input X.
+ * Two flags select which operation to apply.
+ * If z (zero) is 1, then 0 is output instead of the input
+ * If n (negate) is 1, then the input is inverted
+ * Note: The order is significant, so if both are 1, 
+ * the output will be the inversion of 0.
+ */
+
+CHIP UnaryALU {
+    IN  
+        x[16],  // 16-bit input        
+        z, // zero the input?
+        n; // negate the input?
+
+    OUT 
+        out[16]; // 16-bit output
+
+    PARTS:
+   // Put your code here:
+	Not16(in=x[0..15],out=out1);
+	Mux16(a = x[0..15], b = out1, sel = n, out = out2);
+    	Mux16(a = false, b = true, sel = n, out = out3);
+    	Mux16(a = out2, b = out3, sel = z, out = out);
+        
+}

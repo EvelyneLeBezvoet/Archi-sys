@@ -1,0 +1,25 @@
+
+/**
+ * Adds two 4-bit values using the carry lookahead method.
+ * The most significant carry bit is ignored.
+ * We also use the chip Carry
+ */
+
+CHIP CarryLookahead4 {
+    IN  
+        a[4],          
+        b[4], 
+        cin; 
+
+    OUT 
+        out[4],
+        cout;
+    
+
+    PARTS:
+    //Your code here
+	Carry(ai=a[0],bi=b[0],ci=cin,si=out[0],ci1=c1);
+	Carry(ai=a[1],bi=b[1],ci=c1,si=out[1],ci1=c2);
+	Carry(ai=a[2],bi=b[2],ci=c2,si=out[2],ci1=c3);
+	Carry(ai=a[3],bi=b[3],ci=c3,si=out[3],ci1=cout);
+}
