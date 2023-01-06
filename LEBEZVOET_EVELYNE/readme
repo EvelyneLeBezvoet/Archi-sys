@@ -18,7 +18,7 @@ function signal(SIGINT, CtrlCHandler). Then I used the fonction CtrlCHandler() t
 close myshell with the Ctrl+D command and not with Ctrl+C.
 
 
-Exemple:
+Examples:
 cd test2
 cd test2 && ls
 cd notafile && ls
