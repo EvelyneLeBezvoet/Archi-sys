@@ -1,0 +1,33 @@
+To compile the code, type "make", then "./shell" to run it. 
+
+1. execvp is the most appropriate, because we already have the list of arguments args.
+
+2. The symbol for the sequence operator in bash is ";".
+Here is an example where ";" and "&&" do something different:
+"cd test && cd shell-bootstrap" : tries to open directory test but fails and does not open shell-bootstrap although it could have opened it
+"cd test ; cd shell-bootstrap" : tries to open directory test but fails and opens shell-bootstrap.
+
+4. The parentheses in the command (cmd1 && cmd2 | cmd3 ...) 2>/dev/null enables to redirect each error message encountered during the
+execution to be sent in /dev/null, which means that the error messages will not be printed. 
+For exemple, when there isn't any directory called test3,
+"(cd test3; ls | wc -l) 2> /dev/null" : returns the number of elements in the current directory
+"cd test3; ls | wc -l 2> /dev/null" : returns an error and the number of elements in the current directory
+
+5. The shell shuts down. We could try to stop whatever the shell might be doing, and stay in the shell. I caught the SIGINT signal whith the
+function signal(SIGINT, CtrlCHandler). Then I used the fonction CtrlCHandler() to kill the current children process. Thus, we can now
+close myshell with the Ctrl+D command and not with Ctrl+C.
+
+
+Exemple:
+cd test2
+cd test2 && ls
+cd notafile && ls
+echo "hello"; echo "bonjour"
+Ctrl+C
+Ctrl+D
+ls > dump
+ls -l >> dump
+cd notafile 2> dump
+cat < dump  
+
+
